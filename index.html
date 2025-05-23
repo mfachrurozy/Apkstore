@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My APK Store</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>My APK Store</h1>
+      <nav>
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#upload" class="nav-link">Upload APK</a>
+        <a href="#about" class="nav-link">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="home" class="section">
+      <h2>Available APKs</h2>
+      <div class="apk-list" id="apk-list">
+        <!-- Dummy APK cards -->
+        <article class="apk-card">
+          <div class="apk-icon">A</div>
+          <div>
+            <h3>CoolApp v1.0</h3>
+            <p>Size: 15 MB</p>
+            <a href="#" class="btn" download>Download</a>
+          </div>
+        </article>
+        <article class="apk-card">
+          <div class="apk-icon">B</div>
+          <div>
+            <h3>BetterGame v2.3</h3>
+            <p>Size: 25 MB</p>
+            <a href="#" class="btn" download>Download</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="upload" class="section">
+      <h2>Upload Your APK (Simulated)</h2>
+      <form id="upload-form">
+        <label for="apkfile">Choose APK file:</label><br />
+        <input type="file" id="apkfile" name="apkfile" accept=".apk" required />
+        <button type="submit" class="btn">Upload</button>
+      </form>
+      <p id="upload-status"></p>
+    </section>
+
+    <section id="about" class="section">
+      <h2>About This Store</h2>
+      <p>This is a simple APK Store demo site hosted on GitHub Pages.</p>
+      <p>No backend upload, just frontend simulation.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 My APK Store. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const uploadForm = document.getElementById('upload-form');
+    const uploadStatus = document.getElementById('upload-status');
+
+    uploadForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const fileInput = document.getElementById('apkfile');
+      if (fileInput.files.length === 0) {
+        uploadStatus.textContent = "Please select a file first.";
+        return;
+      }
+      const file = fileInput.files[0];
+      if (file.name.endsWith('.apk')) {
+        uploadStatus.textContent = `File "${file.name}" selected. (Simulated upload)`;
+        uploadForm.reset();
+      } else {
+        uploadStatus.textContent = "Please select a valid APK file.";
+      }
+    });
+
+    // Smooth scrolling for nav links
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelectorAll('nav a').forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        const target = document.querySelector(link.getAttribute('href'));
+        target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
